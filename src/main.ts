@@ -4,6 +4,7 @@ import App from './App.vue'
 
 import router from './router'
 import store from './store'
+import 'element-plus/theme-chalk/base.css'
 
 const app = createApp(App)
 
