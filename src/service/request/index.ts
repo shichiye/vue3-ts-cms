@@ -80,7 +80,7 @@ class CYRequest {
     )
   }
 
-  request<T>(config: CYRequestConfig): Promise<T> {
+  request<T>(config: CYRequestConfig<T>): Promise<T> {
     return new Promise((resolve, reject) => {
       // 单个请求对请求config的处理
       if (config.interceptors?.requestInterceptor) {
@@ -111,23 +111,23 @@ class CYRequest {
     })
   }
 
-  get<T>(config: CYRequestConfig): Promise<T> {
+  get<T>(config: CYRequestConfig<T>): Promise<T> {
     return this.request<T>({ ...config, method: 'GET' })
   }
 
-  post<T>(config: CYRequestConfig): Promise<T> {
+  post<T>(config: CYRequestConfig<T>): Promise<T> {
     return this.request<T>({ ...config, method: 'POST' })
   }
 
-  delete<T>(config: CYRequestConfig): Promise<T> {
+  delete<T>(config: CYRequestConfig<T>): Promise<T> {
     return this.request<T>({ ...config, method: 'DELETE' })
   }
 
-  patch<T>(config: CYRequestConfig): Promise<T> {
+  patch<T>(config: CYRequestConfig<T>): Promise<T> {
     return this.request<T>({ ...config, method: 'PATCH' })
   }
 
-  put<T>(config: CYRequestConfig): Promise<T> {
+  put<T>(config: CYRequestConfig<T>): Promise<T> {
     return this.request<T>({ ...config, method: 'PUT' })
   }
 }
