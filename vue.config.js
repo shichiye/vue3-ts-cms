@@ -7,6 +7,18 @@ const { ElementPlusResolver } = require('unplugin-vue-components/resolvers')
 module.exports = defineConfig({
   // 1. CLI提供的属性
   transpileDependencies: true,
+  devServer: {
+    proxy: {
+      '^/api': {
+        target: 'http://152.136.185.210:5000',
+        pathRewrite: {
+          '^/api': ''
+        },
+        changeOrigin: true,
+        ws: false
+      }
+    }
+  },
   // 2. 和webpack属性一致，最后进行合并
   configureWebpack: {
     resolve: {
