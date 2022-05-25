@@ -8,7 +8,11 @@
         <el-header class="page-header">
           <nav-header @foldChange="handleFoldChange" />
         </el-header>
-        <el-main class="page-content">Main</el-main>
+        <el-main>
+          <div class="page-content">
+            <router-view></router-view>
+          </div>
+        </el-main>
       </el-container>
     </el-container>
   </div>
@@ -38,6 +42,11 @@ const handleFoldChange = (isFold: boolean) => {
 .main-content,
 .page {
   height: 100%;
+}
+
+.page-content {
+  background-color: #fff;
+  border-radius: 5px;
 }
 
 .el-header {
