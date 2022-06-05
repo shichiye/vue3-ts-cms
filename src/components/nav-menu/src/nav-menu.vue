@@ -52,7 +52,7 @@ import { computed, ref } from 'vue'
 import { useStore } from '@/store'
 import { useRouter, useRoute } from 'vue-router'
 
-import { pathMaptoMenu } from '@/utils/map-menus'
+import { pathMapToMenu } from '@/utils/map-menus'
 
 defineProps({
   collapse: {
@@ -68,7 +68,7 @@ const router = useRouter()
 const route = useRoute()
 const currentPath = route.path
 
-const menu = pathMaptoMenu(userMenus.value, currentPath)
+const menu = pathMapToMenu(userMenus.value, currentPath)
 const defaultValue = ref(menu?.id + '')
 
 const hadnleMenuItemClick = (item: any) => {
