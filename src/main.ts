@@ -14,10 +14,11 @@ import * as ELIcons from '@element-plus/icons-vue'
 
 const app = createApp(App)
 
-setupStore()
 for (const name in ELIcons) {
   app.component(name, (ELIcons as any)[name])
 }
+
+setupStore()
 app.use(router)
 app.use(store)
 app.mount('#app')
