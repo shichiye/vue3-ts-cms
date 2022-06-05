@@ -1,17 +1,21 @@
 <template>
   <div class="user">
-    <h2>user</h2>
+    <div class="user_search">
+      <cy-form v-bind="searchFormConfig" v-model="formData" />
+    </div>
+    <div class="user_content"></div>
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script setup lang="ts">
+import { ref } from 'vue'
+import CyForm from '@/base-ui/form'
+import { searchFormConfig } from './config/search.config'
 
-export default defineComponent({
-  name: 'user',
-  setup() {
-    return {}
-  }
+const formData = ref({
+  username: '',
+  sport: '',
+  createTime: ''
 })
 </script>
 
