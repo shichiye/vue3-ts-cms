@@ -3,12 +3,50 @@
     <div class="user_search">
       <page-search :searchFormConfig="searchFormConfig"></page-search>
     </div>
+    <div class="user_content">
+      <cy-table :listData="userList" :propList="propList">
+        <template #status="scope">
+          <el-button>{{ scope.row.enable ? '启用' : '禁用' }}</el-button>
+        </template>
+        <template #createAt="scope">
+          <strong>{{ scope.row.createAt }}</strong>
+        </template>
+      </cy-table>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue'
+import { useStore } from '@/store'
 import pageSearch from '@/components/page-search'
 import { searchFormConfig } from './config/search.config'
+import CyTable from '@/base-ui/table'
+
+const store = useStore()
+store.dispatch('system/getPageListAction', {
+  pageUrl: '/users/list',
+  queryInfo: {
+    offset: 0,
+    size: 10
+  }
+})
+
+const userList = computed(() => store.state.system.userList)
+
+const propList = [
+  { prop: 'name', label: '用户名', minWidth: 100 },
+  { prop: 'realname', label: '真实姓名', minWidth: 100 },
+  { prop: 'cellphone', label: '手机号码', minWidth: 100 },
+  { prop: 'enable', label: '状态', minWidth: 100, slotName: 'status' },
+  { prop: 'createAt', label: '创建时间', minWidth: 200, slotName: 'createAt' },
+  { prop: 'updateAt', label: '更新时间', minWidth: 200, slotName: 'updateAt' }
+]
 </script>
 
-<style scoped></style>
+<style scoped>
+.user_content {
+  padding: 20px;
+  border-top: 20px solid #f5f5f5;
+}
+</style>
