@@ -1,5 +1,8 @@
 <template>
   <div class="cy-form">
+    <div class="cy-form_header">
+      <slot name="header"></slot>
+    </div>
     <el-form :label-width="labelWidth">
       <el-row>
         <template v-for="item in formItems" :key="item.label">
@@ -43,11 +46,13 @@
         </template>
       </el-row>
     </el-form>
+    <div class="cy-form_footer">
+      <slot name="footer"></slot>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { emitChangeFn } from 'element-plus'
 import { PropType, ref, watch } from 'vue'
 import { IFormItem } from '../types'
 
