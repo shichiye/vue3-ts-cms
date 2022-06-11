@@ -1,6 +1,7 @@
 import cyRequest from '../index'
 
-import type { IAccount, IDataType, ILoginState } from './types'
+import type { IAccount, ILoginState } from './types'
+import type { IDataType } from '../types'
 
 enum LoginAPI {
   AccountLogin = '/login',
