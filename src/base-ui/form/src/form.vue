@@ -62,7 +62,7 @@
 </template>
 
 <script setup lang="ts">
-import { PropType, watch, ref } from 'vue'
+import { PropType } from 'vue'
 import { IFormItem } from '../types'
 
 const props = defineProps({
