@@ -27,9 +27,9 @@ const props = defineProps({
 })
 
 const formItems = props.searchFormConfig?.formItems ?? []
-const formOriginData: Record<string, string> = {}
+const formOriginData: Record<string, undefined> = {}
 for (const item of formItems) {
-  formOriginData[item.field] = ''
+  formOriginData[item.field] = undefined
 }
 
 const formData = ref(formOriginData)

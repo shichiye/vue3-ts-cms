@@ -16,7 +16,10 @@
                 <el-input
                   :placeholder="item.placeholder"
                   v-bind="item.otherOptions"
-                  v-model="formData[`${item.field}`]"
+                  :modelValue="modelValue[item.field]"
+                  @update:modelValue="
+                    handleUpdateModelValue($event, item.field)
+                  "
                 />
               </template>
               <template v-else-if="item.type === 'select'">
@@ -24,7 +27,10 @@
                   :placeholder="item.placeholder"
                   v-bind="item.otherOptions"
                   style="width: 100%"
-                  v-model="formData[`${item.field}`]"
+                  :modelValue="modelValue[item.field]"
+                  @update:modelValue="
+                    handleUpdateModelValue($event, item.field)
+                  "
                 >
                   <el-option
                     v-for="option in item.options"
@@ -38,7 +44,10 @@
               <template v-else-if="item.type === 'datepicker'">
                 <el-date-picker
                   v-bind="item.otherOptions"
-                  v-model="formData[`${item.field}`]"
+                  :modelValue="modelValue[item.field]"
+                  @update:modelValue="
+                    handleUpdateModelValue($event, item.field)
+                  "
                 ></el-date-picker>
               </template>
             </el-form-item>
@@ -53,7 +62,7 @@
 </template>
 
 <script setup lang="ts">
-import { PropType, watch, computed, reactive } from 'vue'
+import { PropType, watch, ref } from 'vue'
 import { IFormItem } from '../types'
 
 const props = defineProps({
@@ -89,19 +98,9 @@ const props = defineProps({
 
 const emit = defineEmits(['update:modelValue'])
 
-const formData = computed(() => {
-  return reactive({ ...props.modelValue })
-})
-
-watch(
-  formData,
-  (newValue) => {
-    emit('update:modelValue', newValue)
-  },
-  {
-    deep: true
-  }
-)
+const handleUpdateModelValue = (value: EventTarget, field: string) => {
+  emit('update:modelValue', { ...props.modelValue, [field]: value })
+}
 </script>
 
 <style scoped>
