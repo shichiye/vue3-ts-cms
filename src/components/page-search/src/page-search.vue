@@ -6,8 +6,8 @@
       </template>
       <template #footer>
         <div class="page-search_footer">
-          <el-button :icon="RefreshLeft">重置</el-button>
-          <el-button type="primary" :icon="Search">查询</el-button>
+          <el-button icon="RefreshLeft" @click="handleReset">重置</el-button>
+          <el-button type="primary" icon="Search">查询</el-button>
         </div>
       </template>
     </cy-form>
@@ -15,22 +15,28 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { PropType, ref } from 'vue'
 import CyForm from '@/base-ui/form'
-import { RefreshLeft, Search } from '@element-plus/icons-vue'
+import { IForm } from '@/base-ui/form'
 
-defineProps({
+const props = defineProps({
   searchFormConfig: {
-    type: Object,
+    type: Object as PropType<IForm>,
     require: true
   }
 })
 
-const formData = ref({
-  username: '',
-  sport: '',
-  createTime: ''
-})
+const formItems = props.searchFormConfig?.formItems ?? []
+const formOriginData: Record<string, string> = {}
+for (const item of formItems) {
+  formOriginData[item.field] = ''
+}
+
+const formData = ref(formOriginData)
+
+const handleReset = () => {
+  formData.value = formOriginData
+}
 </script>
 
 <style scoped>

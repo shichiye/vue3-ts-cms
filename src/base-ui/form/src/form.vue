@@ -53,7 +53,7 @@
 </template>
 
 <script setup lang="ts">
-import { PropType, ref, watch } from 'vue'
+import { PropType, watch, computed, reactive } from 'vue'
 import { IFormItem } from '../types'
 
 const props = defineProps({
@@ -89,7 +89,9 @@ const props = defineProps({
 
 const emit = defineEmits(['update:modelValue'])
 
-const formData = ref({ ...props.modelValue })
+const formData = computed(() => {
+  return reactive({ ...props.modelValue })
+})
 
 watch(
   formData,
